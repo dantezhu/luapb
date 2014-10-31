@@ -1,4 +1,4 @@
-require("luapb");
+-- require("luapb");
 
 --package lm;
 --message test

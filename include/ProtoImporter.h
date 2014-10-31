@@ -14,7 +14,7 @@ class ProtoImporter
 public:
 	ProtoImporter();
 public:
-	bool Import(const std::string& filename);
+	bool Import(const std::string& filename, const char* directory);
 	google::protobuf::Message* createDynamicMessage(const std::string& typeName);
 public:
 	google::protobuf::compiler::Importer importer;

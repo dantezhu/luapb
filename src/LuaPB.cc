@@ -275,7 +275,12 @@ static int pb_repeated_set(lua_State* L)
 static int pb_import(lua_State* L)
 {
 	const char* filename = luaL_checkstring(L, 1);
-	sProtoImporter.Import(filename);
+	const char* directory = NULL;
+    // 如果有两个参数的话
+    if (lua_gettop(L) == 2) {
+        directory = luaL_checkstring(L, 2);
+    }
+	sProtoImporter.Import(filename, directory);
 	return 0;
 }
 

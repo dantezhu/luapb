@@ -33,8 +33,15 @@ ProtoImporter::ProtoImporter():
 	printf("[ProtoImporter] protopath:%s\n", protopath);
 }
 
-bool ProtoImporter::Import(const std::string& filename)
+bool ProtoImporter::Import(const std::string& filename, const char* directory)
 {
+// ADD-BEGIN by dantezhu in 2014-11-01 02:08:25
+// 如果是null，就不设置
+    if (directory) {
+        sourceTree.MapPath("", directory);
+    }
+// ADD-END
+
 	const  google::protobuf::FileDescriptor* filedescriptor = importer.Import(filename);
 	 if (!filedescriptor)
 	 {

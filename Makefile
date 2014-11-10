@@ -15,7 +15,7 @@ PROTOBUF_INC_DIR ?=/usr/local/include
 LIB = luapb.so
 
 all:
-	$(CXX) $(CFLAGS) -c -Iinclude -I$(LUA_INC_DIR) -I$(PROTOBUF_INC_DIR) src/*.cc
+	$(CXX) $(CFLAGS) -c -Iluapb -I$(LUA_INC_DIR) -I$(PROTOBUF_INC_DIR) luapb/*.cc
 	$(CXX) $(LDFLAGS) -o $(LIB) *.o -L/usr/local/lib -lprotobuf  -llua
 
 clean:

@@ -79,7 +79,7 @@ static int pb_repeated_add(lua_State* L)
     }
     else if (field->type() == google::protobuf::FieldDescriptor::TYPE_INT64)
     {
-        long val = static_cast<long>(luaL_checknumber(L, 2));
+        int64 val = static_cast<int64>(luaL_checknumber(L, 2));
         reflection->AddInt64(message, field, val);
     }
     else if(field->type() == google::protobuf::FieldDescriptor::TYPE_UINT32)
@@ -89,7 +89,7 @@ static int pb_repeated_add(lua_State* L)
     }
     else if (field->type() == google::protobuf::FieldDescriptor::TYPE_UINT64)
     {
-        unsigned long val = static_cast<unsigned long>(luaL_checknumber(L, 2));
+        uint64 val = static_cast<uint64>(luaL_checknumber(L, 2));
         reflection->AddUInt64(message, field, val);
     }
     else if(field->type() == google::protobuf::FieldDescriptor::TYPE_FLOAT)
@@ -171,6 +171,10 @@ static int pb_repeated_get(lua_State* L)
 	{
 		lua_pushinteger(L, reflection->GetRepeatedInt32(*message, field, index));
 	}
+    else if(field->type() == google::protobuf::FieldDescriptor::TYPE_INT64)
+    {
+        lua_pushnumber(L, reflection->GetRepeatedInt64(*message, field, index));
+    }
 	else if(field->type() == google::protobuf::FieldDescriptor::TYPE_STRING)
 	{
 		lua_pushstring(L, reflection->GetRepeatedString(*message, field, index).data());
@@ -183,6 +187,10 @@ static int pb_repeated_get(lua_State* L)
 	{
 		lua_pushinteger(L, reflection->GetRepeatedUInt32(*message, field, index));
 	}
+    else if(field->type() == google::protobuf::FieldDescriptor::TYPE_UINT64)
+    {
+        lua_pushnumber(L, reflection->GetRepeatedUInt64(*message, field, index));
+    }
 	else if(field->type() == google::protobuf::FieldDescriptor::TYPE_FLOAT)
 	{
 		lua_pushnumber(L, reflection->GetRepeatedFloat(*message, field, index));
@@ -232,11 +240,21 @@ static int pb_repeated_set(lua_State* L)
 		int val = static_cast<int>(luaL_checkinteger(L, 3));
 		reflection->SetRepeatedInt32(message, field, index, val);
 	}
+    else if(field->type() == google::protobuf::FieldDescriptor::TYPE_INT64)
+    {
+        int64 val = static_cast<int64>(luaL_checknumber(L, 3));
+        reflection->SetRepeatedInt64(message, field, index, val);
+    }
 	else if(field->type() == google::protobuf::FieldDescriptor::TYPE_UINT32)
 	{
 		unsigned int val = static_cast<unsigned int>(luaL_checkinteger(L, 3));
 		reflection->SetRepeatedUInt32(message, field, index, val);
 	}
+    else if(field->type() == google::protobuf::FieldDescriptor::TYPE_UINT64)
+    {
+        uint64 val = static_cast<uint64>(luaL_checknumber(L, 3));
+        reflection->SetRepeatedUInt64(message, field, index, val);
+    }
 	else if(field->type() == google::protobuf::FieldDescriptor::TYPE_FLOAT)
 	{
 		float val = static_cast<float>(luaL_checknumber(L, 3));
@@ -429,7 +447,7 @@ static int pb_set(lua_State* L)
     }
     else if(field->type() == google::protobuf::FieldDescriptor::TYPE_INT64)
     {
-        long val = static_cast<long>(luaL_checknumber(L, 3));
+        int64 val = static_cast<int64>(luaL_checknumber(L, 3));
         reflection->SetInt64(message, field, val);
     }
     else if(field->type() == google::protobuf::FieldDescriptor::TYPE_UINT32)
@@ -439,7 +457,7 @@ static int pb_set(lua_State* L)
     }
     else if(field->type() == google::protobuf::FieldDescriptor::TYPE_UINT64)
     {
-        unsigned long val = static_cast<unsigned long>(luaL_checknumber(L, 3));
+        uint64 val = static_cast<uint64>(luaL_checknumber(L, 3));
         reflection->SetUInt64(message, field, val);
     }
     else if(field->type() == google::protobuf::FieldDescriptor::TYPE_FLOAT)

@@ -117,7 +117,7 @@ static int pb_repeated_add(lua_State* L)
     {
     	size_t strlen;
     	const char* str = luaL_checklstring(L, 2, &strlen);
-        reflection->AddString(message, field, str);
+        reflection->AddString(message, field, std::string(str, strlen));
     }
     else
     {

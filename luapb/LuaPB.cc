@@ -280,7 +280,7 @@ static int pb_repeated_set(lua_State* L)
 	{
 		size_t strlen;
 		const char *str = static_cast<const char *>(luaL_checklstring(L, 3, &strlen));
-		reflection->SetRepeatedString(message, field, index, str);
+		reflection->SetRepeatedString(message, field, index, std::string(str, strlen));
 	}
 	else
 	{
@@ -438,7 +438,7 @@ static int pb_set(lua_State* L)
     {
     	size_t strlen;
     	const char *str = luaL_checklstring(L, 3, &strlen);
-        reflection->SetString(message, field, str);
+        reflection->SetString(message, field, std::string(str, strlen));
     }
     else if(field->type() == google::protobuf::FieldDescriptor::TYPE_INT32)
     {
